@@ -267,6 +267,32 @@ const submitForm = () => {
   color: #8ad09e;
 }
 
+@media (max-width: 1024px) and (min-width: 768px) {
+  .shell {
+    grid-template-columns: 1fr;
+  }
+
+  .copy {
+    min-height: 24rem;
+    border-right: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .vertical-label {
+    display: none;
+  }
+
+  .copy-inner {
+    left: 1.2rem;
+    right: 1.2rem;
+    bottom: 1.2rem;
+  }
+
+  .form {
+    padding: 1.4rem 1.2rem;
+  }
+}
+
 @media (max-width: 920px) {
   .shell {
     grid-template-columns: 1fr;

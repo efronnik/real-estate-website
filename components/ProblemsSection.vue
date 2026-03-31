@@ -324,6 +324,36 @@ onBeforeUnmount(() => {
   transform: scale(1.18);
 }
 
+@media (max-width: 1024px) and (min-width: 768px) {
+  .stage {
+    margin-top: 1.9rem;
+    padding: 1rem;
+  }
+
+  .stage-head p {
+    margin-left: 0;
+    font-size: 0.76rem;
+    letter-spacing: 0.13em;
+  }
+
+  .carousel-3d {
+    height: 21rem;
+  }
+
+  .panel {
+    width: min(23rem, 68vw);
+    min-height: 16.8rem;
+  }
+
+  .panel.left {
+    transform: translate(calc(-50% - 11rem), -50%) rotateY(22deg) scale(0.82);
+  }
+
+  .panel.right {
+    transform: translate(calc(-50% + 11rem), -50%) rotateY(-22deg) scale(0.82);
+  }
+}
+
 @media (max-width: 900px) {
   .carousel-3d {
     height: 20rem;

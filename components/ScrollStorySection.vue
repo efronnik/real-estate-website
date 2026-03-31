@@ -172,7 +172,13 @@ const arrows = [
 }
 
 
-@media (max-width: 980px) {
+@media (max-width: 1024px) and (min-width: 768px) {
+  .arrow-row {
+    gap: 0.06rem;
+  }
+}
+
+@media (max-width: 767px) {
   .arrow-row {
     grid-template-columns: repeat(2, 1fr);
     width: min(520px, 100%);

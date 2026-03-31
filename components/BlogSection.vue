@@ -228,6 +228,39 @@ const sidePosts = posts.slice(1);
   margin-top: 0.15rem;
 }
 
+@media (max-width: 1024px) and (min-width: 768px) {
+  .editorial {
+    margin-top: 1.8rem;
+    padding: 0.75rem;
+  }
+
+  .editorial-bg {
+    min-height: clamp(22rem, 66vw, 30rem);
+  }
+
+  .featured-copy {
+    width: min(32rem, calc(100% - 2rem));
+    padding: 1rem 1.05rem;
+  }
+
+  .featured-copy h3 {
+    font-size: clamp(1.2rem, 2.5vw, 1.75rem);
+  }
+
+  .dock {
+    width: min(18rem, 34%);
+  }
+
+  .dock-card {
+    grid-template-columns: 5.3rem 1fr;
+    padding: 0.5rem;
+  }
+
+  .dock-copy h4 {
+    font-size: 0.88rem;
+  }
+}
+
 @media (max-width: 900px) {
   .editorial-bg {
     min-height: clamp(24rem, 88vw, 34rem);

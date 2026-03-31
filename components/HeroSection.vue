@@ -559,7 +559,89 @@ const cloudNearStyle = computed(() => ({
 @keyframes cp-drift-b { from { transform: translateX(0); } to { transform: translateX(-56px); } }
 @keyframes cp-drift-c { from { transform: translateX(0); } to { transform: translateX(64px); } }
 
-@media (max-width: 900px) {
+@media (max-width: 1024px) and (min-width: 768px) {
+  .cp-topbar {
+    width: calc(100% - 30px);
+    top: 10px;
+    padding: 8px 0;
+    gap: 12px;
+    grid-template-columns: auto auto;
+    justify-content: space-between;
+  }
+
+  .cp-brand {
+    font-size: 1.62rem;
+  }
+
+  .cp-nav {
+    gap: clamp(6px, 1.05vw, 11px);
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: max-content;
+  }
+
+  .cp-nav a {
+    font-size: 0.72rem;
+  }
+
+  .cp-sign {
+    padding: 0.56rem 0.92rem;
+    font-size: 0.78rem;
+  }
+
+  .cp-sign .cp-btn-text-wrap {
+    height: 1.15em;
+    line-height: 1.15;
+  }
+
+  .cp-hero {
+    min-height: 146svh;
+    padding: 146px 18px 226px;
+  }
+
+  .cp-content {
+    margin-top: 28px;
+  }
+
+  .cp-content h1 {
+    font-size: clamp(2.7rem, 7.4vw, 4.35rem);
+  }
+
+  .cp-content p {
+    font-size: clamp(0.92rem, 1.75vw, 1.08rem);
+    margin-top: 0.56rem;
+  }
+
+  .cp-btn {
+    margin-top: 0.84rem;
+    padding: 0.74rem 1.24rem;
+    gap: 0.34rem;
+    font-size: 0.82rem;
+  }
+
+  .cp-btn-text-wrap {
+    height: 1.15em;
+    line-height: 1.15;
+  }
+
+  .cp-btn-arrow {
+    font-size: 0.9rem;
+  }
+
+  .cp-house-wrap {
+    width: min(1220px, 118vw);
+    bottom: -236px;
+    left: 46%;
+  }
+
+  .cp-house {
+    width: min(1220px, 108%);
+    margin-left: -3vw;
+  }
+}
+
+@media (max-width: 767px) {
   .cp-topbar {
     width: calc(100% - 26px);
     top: 12px;
