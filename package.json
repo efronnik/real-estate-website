@@ -1,0 +1,15 @@
+{
+  "name": "real-estate-expert-landing",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "ulimit -n 65536 && NUXT_TELEMETRY_DISABLED=1 nuxt dev --port 3000",
+    "build": "nuxt build",
+    "preview": "nuxt preview",
+    "start": "node .output/server/index.mjs",
+    "clean": "nuxi cleanup"
+  },
+  "dependencies": {
+    "nuxt": "^3.13.2"
+  }
+}
