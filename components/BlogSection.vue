@@ -1,29 +1,44 @@
 <script setup lang="ts">
+withDefaults(
+  defineProps<{
+    showHeader?: boolean;
+    fullBleed?: boolean;
+  }>(),
+  {
+    showHeader: true,
+    fullBleed: false
+  }
+);
+
 const posts = [
   {
-    title: "7 sygnalow, ze cena blokuje sprzedaz",
-    excerpt: "Jak odczytac dane z rynku i ustawic cene mieszkania, zanim negocjacje zaczna zabierac Twoj margines.",
+    slug: "7-sygnalow-ze-cena-blokuje-sprzedaz",
+    title: "7 sygnałów, że cena blokuje sprzedaż",
+    excerpt: "Jak odczytać dane z rynku i ustawić cenę mieszkania, zanim negocjacje zaczną zabierać Twój margines.",
     image: "https://images.unsplash.com/photo-1460317442991-0ec209397118?auto=format&fit=crop&w=1200&q=80",
     meta: "Warszawa / analiza rynku",
-    cta: "Czytaj analize"
+    cta: "Czytaj analizę"
   },
   {
-    title: "Home staging premium bez przepalania budzetu",
-    excerpt: "Co realnie podnosi postrzegana wartosc mieszkania i pomaga szybciej domknac decyzje klienta.",
+    slug: "home-staging-premium-bez-przepalania-budzetu",
+    title: "Home staging premium bez przepalania budżetu",
+    excerpt: "Co realnie podnosi postrzeganą wartość mieszkania i pomaga szybciej domknąć decyzję klienta.",
     image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
     meta: "home staging / premium",
     cta: "Zobacz checklist"
   },
   {
-    title: "Dokumenty do sprzedazy: checklista eksperta",
-    excerpt: "Lista formalnosci, ktora przyspiesza final i ogranicza ryzyko zerwania transakcji.",
+    slug: "dokumenty-do-sprzedazy-checklista-eksperta",
+    title: "Dokumenty do sprzedaży: checklista eksperta",
+    excerpt: "Lista formalności, która przyspiesza finał i ogranicza ryzyko zerwania transakcji.",
     image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1200&q=80",
-    meta: "formalnosci / bezpieczenstwo",
-    cta: "Pobierz liste"
+    meta: "formalności / bezpieczeństwo",
+    cta: "Pobierz listę"
   },
   {
+    slug: "negocjacje-ceny-scenariusze-rozmowy",
     title: "Negocjacje ceny: scenariusze rozmowy",
-    excerpt: "Jak odpowiadac na presje klienta i utrzymac finalna cene bez utraty kontroli nad procesem.",
+    excerpt: "Jak odpowiadać na presję klienta i utrzymać finalną cenę bez utraty kontroli nad procesem.",
     image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1200&q=80",
     meta: "negocjacje / strategie",
     cta: "Czytaj poradnik"
@@ -37,16 +52,16 @@ const sidePosts = posts.slice(1);
 <template>
   <section id="blog" class="section blog">
     <div class="container">
-      <header class="reveal blog-head">
-        <p class="eyebrow">Blog / artykuly</p>
+      <header v-if="showHeader" class="reveal blog-head">
+        <p class="eyebrow">Blog / artykuły</p>
         <h2 class="section-title sweep-reveal">Perspektywa ekspercka w estetyce nowoczesnego magazynu</h2>
         <p class="section-copy">
-          Materialy, ktore realnie przygotowuja do sprzedazy i negocjacji. Bez ogolnikow, tylko
-          decyzje, ktore poprawiaja wynik finansowy.
+          Materiały, które realnie przygotowują do sprzedaży i negocjacji. Bez ogólników, tylko
+          decyzje, które poprawiają wynik finansowy.
         </p>
       </header>
 
-      <div class="editorial reveal">
+      <div class="editorial reveal" :class="{ 'editorial--full-bleed': fullBleed }">
         <div class="editorial-bg" :style="{ backgroundImage: `url(${featuredPost.image})` }">
           <div class="scan-lines" aria-hidden="true"></div>
           <div class="scan-lines-right" aria-hidden="true"></div>
@@ -55,7 +70,7 @@ const sidePosts = posts.slice(1);
             <p class="meta">{{ featuredPost.meta }}</p>
             <h3>{{ featuredPost.title }}</h3>
             <p>{{ featuredPost.excerpt }}</p>
-            <a href="#" class="link-arrow">{{ featuredPost.cta }}</a>
+            <a :href="`/poradnik/${featuredPost.slug}`" class="link-arrow">{{ featuredPost.cta }}</a>
           </article>
 
           <div class="dock">
@@ -64,7 +79,7 @@ const sidePosts = posts.slice(1);
               <div class="dock-copy">
                 <p class="meta">{{ post.meta }}</p>
                 <h4>{{ post.title }}</h4>
-                <a href="#" class="link-arrow">{{ post.cta }}</a>
+                <a :href="`/poradnik/${post.slug}`" class="link-arrow">{{ post.cta }}</a>
               </div>
             </article>
           </div>
@@ -92,6 +107,12 @@ const sidePosts = posts.slice(1);
   background: #0b0d10;
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 0.28rem;
+}
+
+.editorial--full-bleed {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
 }
 
 .editorial-bg {
@@ -169,6 +190,11 @@ const sidePosts = posts.slice(1);
   margin-top: 0.62rem;
   max-width: 56ch;
   color: rgba(243, 238, 226, 0.78);
+}
+
+.featured-copy .meta {
+  margin-top: 0;
+  color: #d5b880;
 }
 
 .dock {

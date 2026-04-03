@@ -25,7 +25,7 @@ body,
 }
 
 body {
-  font-family: "Fraunces", serif;
+  font-family: "Playfair Display", serif;
   color: var(--ink);
   background:
     radial-gradient(120% 80% at 90% 0%, rgba(186, 152, 89, 0.11), transparent 58%),
@@ -56,6 +56,26 @@ a {
   text-decoration: none;
 }
 
+:where(
+  button,
+  a.cp-btn,
+  a.cp-sign,
+  a.prefooter-btn,
+  .controls button,
+  .form button
+):hover,
+:where(
+  button,
+  a.cp-btn,
+  a.cp-sign,
+  a.prefooter-btn,
+  .controls button,
+  .form button
+):focus-visible {
+  border-color: var(--gold) !important;
+  color: var(--gold) !important;
+}
+
 .container {
   width: min(1380px, calc(100% - 2.4rem));
   margin: 0 auto;
@@ -70,7 +90,7 @@ a {
   font-size: 0.72rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--gold) !important;
   font-weight: 700;
 }
 
@@ -79,7 +99,7 @@ a {
   font-size: clamp(2rem, 5.2vw, 5.4rem);
   line-height: 0.92;
   letter-spacing: -0.035em;
-  font-family: "Fraunces", serif;
+  font-family: "Playfair Display", serif;
   font-weight: 500;
   max-width: 20ch;
 }
@@ -89,6 +109,25 @@ a {
   max-width: 62ch;
   color: var(--muted);
   font-size: clamp(0.95rem, 1.3vw, 1.08rem);
+}
+
+.section h1 {
+  font-size: clamp(2.4rem, 5.6vw, 5.4rem);
+}
+
+.section h2 {
+  font-size: clamp(2rem, 4.4vw, 4.1rem);
+  line-height: 0.92;
+  letter-spacing: -0.035em;
+}
+
+.section h3,
+.section h4,
+.section h5 {
+  font-size: clamp(1.2rem, 2.15vw, 1.72rem);
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  font-weight: 700;
 }
 
 .surface {
@@ -136,27 +175,14 @@ a {
 .reveal.delay-3 { transition-delay: 320ms; }
 
 .sweep-reveal {
-  --sweep-dim: rgba(19, 19, 19, 0.24);
-  --sweep-ink: rgba(19, 19, 19, 0.96);
-  color: var(--sweep-dim);
-  background-image: linear-gradient(
-    90deg,
-    var(--sweep-ink) 0%,
-    var(--sweep-ink) 48%,
-    var(--sweep-dim) 52%,
-    var(--sweep-dim) 100%
-  );
-  background-size: 210% 100%;
-  background-position: 100% 0;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  transition: background-position 1.65s cubic-bezier(0.19, 1, 0.22, 1);
-  transition-delay: 120ms;
+  color: rgba(19, 19, 19, 0.96);
+  background: none;
+  -webkit-text-fill-color: currentColor;
+  transition: none;
 }
 
 .sweep-reveal.sweep-visible {
-  background-position: 0 0;
+  color: rgba(19, 19, 19, 0.96);
 }
 
 @media (max-width: 1024px) and (min-width: 768px) {

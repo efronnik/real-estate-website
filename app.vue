@@ -1,3 +1,13 @@
+<script setup lang="ts">
+const route = useRoute();
+const showGlobalHeader = computed(() => route.path !== "/");
+</script>
+
 <template>
-  <NuxtPage />
+  <div>
+    <SiteHeader v-if="showGlobalHeader" />
+    <NuxtPage />
+    <CookieBanner />
+    <ScrollTopButton />
+  </div>
 </template>

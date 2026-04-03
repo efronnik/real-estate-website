@@ -3,31 +3,72 @@ import { onBeforeUnmount, onMounted } from "vue";
 
 const currentSlide = ref(0);
 const isPaused = ref(false);
-
 const problems = [
   {
-    title: "Cena ustawiona emocjonalnie",
-    text: "Pierwsze tygodnie bez ruchu zabijaja momentum. Pozniej mieszkanie wyglada na problematyczne i klienci negocjuja ostrzej.",
-    metric: "-6-12% ceny",
-    image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1400&q=80"
+    title: "Brak analizy rynku",
+    text: "Ustalasz cenę według swoich potrzeb, a nie na podstawie cen transakcyjnych podobnych nieruchomości.",
+    metric: "Konsekwencja: za tanio albo za drogo",
+    image: "https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=1400"
   },
   {
-    title: "Nieczytelny przekaz oferty",
-    text: "Zdjecia bez narracji i przypadkowy opis nie buduja poczucia wartosci. Klient porownuje mieszkanie tylko przez metry i cene.",
-    metric: "2x mniej zapytan",
-    image: "https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&w=1400&q=80"
+    title: "Nieprzygotowane wnętrza",
+    text: "Publikujesz ofertę bez przygotowania mieszkania: drobne usterki, przedmioty osobiste i chaos obniżają odbiór.",
+    metric: "Konsekwencja: nie przyciągasz uwagi kupujących",
+    image: "https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=1400"
   },
   {
-    title: "Negocjacje bez strategii",
-    text: "Brak scenariuszy rozmowy powoduje oddawanie ceny w pierwszych minutach. Najczesciej bez swiadomosci, ze byl margines do obrony.",
-    metric: "nawet -80k PLN",
-    image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1400&q=80"
+    title: "Zdjęcia słabej jakości",
+    text: "Wykonujesz zdjęcia smartfonem zamiast zamówić profesjonalną sesję, która podnosi wartość oferty.",
+    metric: "Konsekwencja: mniejsza liczba zapytań",
+    image: "https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=1400"
   },
   {
-    title: "Chaos formalny",
-    text: "Dokumenty i terminy domykane za pozno wydluzaja final. Rosnie ryzyko, ze klient wycofa sie przed podpisaniem.",
-    metric: "+3-5 tygodni",
-    image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1400&q=80"
+    title: "Niepełny opis oferty",
+    text: "Podajesz tylko parametry techniczne i lokalizację, pomijając udogodnienia oraz styl życia w okolicy.",
+    metric: "Konsekwencja: oferta nie budzi emocji",
+    image: "https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&w=1400"
+  },
+  {
+    title: "Brak reklamy",
+    text: "Ograniczasz reklamę tylko do jednego portalu i nie docierasz do wszystkich potencjalnych kupujących.",
+    metric: "Konsekwencja: wąski zasięg oferty",
+    image: "https://images.pexels.com/photos/280222/pexels-photo-280222.jpeg?auto=compress&cs=tinysrgb&w=1400"
+  },
+  {
+    title: "Prezentacja mieszkania",
+    text: "Podczas prezentacji cała rodzina jest w mieszkaniu, a opowieści właściciela odciągają uwagę od atutów oferty.",
+    metric: "Konsekwencja: zniechęcenie kupujących",
+    image: "https://images.pexels.com/photos/2724749/pexels-photo-2724749.jpeg?auto=compress&cs=tinysrgb&w=1400"
+  },
+  {
+    title: "Negocjacje ceny",
+    text: "Zbyt szybko podajesz minimalny akceptowalny poziom ceny, oddając przewagę w rozmowie drugiej stronie.",
+    metric: "Konsekwencja: niższa cena finalna",
+    image: "https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=1400"
+  },
+  {
+    title: "Oferta w wielu agencjach",
+    text: "Współpraca z wieloma biurami bez jednej strategii osłabia wiarygodność oferty i rozmywa odpowiedzialność.",
+    metric: "Konsekwencja: dłuższa sprzedaż i presja na obniżkę",
+    image: "https://images.pexels.com/photos/48195/document-agreement-documents-sign-48195.jpeg?auto=compress&cs=tinysrgb&w=1400"
+  },
+  {
+    title: "Sprzedasz za tanio albo za drogo",
+    text: "Błędna wycena lub zbyt wysoka cena startowa potrafi zatrzymać proces już na etapie pierwszych tygodni.",
+    metric: "Konsekwencja: strata pieniędzy lub czasu",
+    image: "https://images.pexels.com/photos/259588/pexels-photo-259588.jpeg?auto=compress&cs=tinysrgb&w=1400"
+  },
+  {
+    title: "Nie trafiasz do grupy docelowej",
+    text: "Słaba prezentacja i komunikacja oferty sprawia, że nie przyciągasz odpowiednich kupujących.",
+    metric: "Konsekwencja: mało wartościowych zapytań",
+    image: "https://images.pexels.com/photos/7944060/pexels-photo-7944060.jpeg?auto=compress&cs=tinysrgb&w=1400"
+  },
+  {
+    title: "Każdy element ma znaczenie",
+    text: "Zaniedbanie nawet drobnych etapów procesu sprzedaży może kosztować Cię tysiące złotych.",
+    metric: "Konsekwencja: realne straty finansowe",
+    image: "https://images.pexels.com/photos/8293701/pexels-photo-8293701.jpeg?auto=compress&cs=tinysrgb&w=1400"
   }
 ];
 
@@ -50,7 +91,7 @@ let timer: ReturnType<typeof setInterval> | null = null;
 onMounted(() => {
   timer = setInterval(() => {
     if (!isPaused.value) nextSlide();
-  }, 4200);
+  }, 5200);
 });
 
 onBeforeUnmount(() => {
@@ -62,25 +103,19 @@ onBeforeUnmount(() => {
   <section id="bledy" class="section problems">
     <div class="container">
       <div class="lead reveal">
-        <p class="eyebrow no-sweep">Najdrozsze pomylki przy sprzedazy</p>
-        <h2 class="section-title sweep-reveal">Bledy, przez ktore mieszkanie sprzedaje sie dluzej i taniej</h2>
+        <p class="eyebrow no-sweep">Najdroższe pomyłki przy sprzedaży</p>
+        <h2 class="section-title sweep-reveal">Kosztowne błędy w procesie sprzedaży mieszkania</h2>
         <p class="section-copy sweep-reveal">
-          W premium segmencie nie przegrywa ten, kto ma slabsza nieruchomosc. Przegrywa ten, kto
-          oddaje narracje i kontrole procesu.
+          W premium segmencie nie przegrywa ten, kto ma słabszą nieruchomość. Przegrywa ten, kto oddaje narrację i kontrolę procesu.
         </p>
       </div>
 
       <div class="stage reveal delay-1" @mouseenter="isPaused = true" @mouseleave="isPaused = false">
         <div class="stage-head">
           <p class="no-sweep">Najbardziej kosztowne punkty procesu</p>
-          <div class="controls">
-            <button class="nav" type="button" aria-label="Poprzedni slajd" @click="prevSlide">←</button>
-            <button class="nav" type="button" aria-label="Nastepny slajd" @click="nextSlide">→</button>
-          </div>
         </div>
 
-        <div class="carousel-3d">
-          <div class="orb" aria-hidden="true"></div>
+        <div class="carousel">
           <article
             v-for="(item, idx) in problems"
             :key="item.title"
@@ -95,7 +130,7 @@ onBeforeUnmount(() => {
             @click="currentSlide = idx"
           >
             <div class="panel-overlay">
-              <p class="kicker">0{{ idx + 1 }}</p>
+              <p class="kicker">{{ String(idx + 1).padStart(2, "0") }}</p>
               <h3>{{ item.title }}</h3>
               <p>{{ item.text }}</p>
               <div class="metric">{{ item.metric }}</div>
@@ -103,13 +138,13 @@ onBeforeUnmount(() => {
           </article>
         </div>
 
-        <div class="dots" role="tablist" aria-label="Nawigacja slajdow">
+        <div class="dots" role="tablist" aria-label="Nawigacja slajdów">
           <button
             v-for="(item, idx) in problems"
             :key="`dot-${item.title}`"
             class="dot"
             :class="{ active: idx === currentSlide }"
-            :aria-label="`Przejdz do slajdu ${idx + 1}`"
+            :aria-label="`Przejdź do slajdu ${idx + 1}`"
             @click="currentSlide = idx"
           >
             <span class="dot-core"></span>
@@ -136,29 +171,7 @@ onBeforeUnmount(() => {
 }
 
 .stage {
-  margin-top: 2.3rem;
-  padding: clamp(1rem, 2vw, 1.4rem);
-  border-radius: 0.35rem;
-  background: transparent;
-  border: 0;
-  box-shadow: none;
-}
-
-.nav {
-  width: 2.8rem;
-  height: 2.8rem;
-  border-radius: 0.3rem;
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  background: rgba(255, 255, 255, 0.05);
-  color: #f3eee3;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
-}
-
-.nav:hover {
-  transform: translateY(-2px);
-  background: rgba(255, 255, 255, 0.13);
+  margin-top: 2.2rem;
 }
 
 .stage-head {
@@ -166,244 +179,173 @@ onBeforeUnmount(() => {
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  margin-bottom: 1.2rem;
+  margin-bottom: 1rem;
 }
 
 .stage-head p {
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 0.16em;
-  color: rgba(19, 19, 19, 0.58);
-  margin-left: -1.35rem;
+  color: rgba(19, 19, 19, 0.56);
 }
 
-.controls {
-  display: flex;
-  gap: 0.55rem;
+.carousel {
+  position: relative;
+  height: clamp(24rem, 44vw, 30rem);
+  overflow: hidden;
 }
 
 .panel {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: min(27rem, 72vw);
-  min-height: 20rem;
-  border-radius: 0.3rem;
+  width: min(34rem, 72vw);
+  min-height: 23rem;
+  border-radius: 0;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.26);
   background-image: var(--bg);
   background-size: cover;
   background-position: center;
   transform-origin: center center;
-  transition: transform 0.72s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.55s ease, filter 0.55s ease;
+  transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.45s ease, filter 0.45s ease;
   cursor: pointer;
-}
-
-.carousel-3d {
-  position: relative;
-  height: clamp(22rem, 40vw, 27rem);
-  overflow: hidden;
-  border-radius: 0.3rem;
-  perspective: 1200px;
-}
-
-.orb {
-  position: absolute;
-  left: 50%;
-  bottom: -2.8rem;
-  width: 28rem;
-  height: 7rem;
-  transform: translateX(-50%);
-  background: radial-gradient(ellipse at center, rgba(186, 152, 89, 0.35), rgba(186, 152, 89, 0));
-  filter: blur(8px);
-  pointer-events: none;
-  z-index: 0;
 }
 
 .panel-overlay {
   min-height: 100%;
-  padding: 1.35rem;
-  background: linear-gradient(180deg, rgba(8, 8, 8, 0.24), rgba(8, 8, 8, 0.7));
+  padding: 1.25rem;
+  background: linear-gradient(180deg, rgba(10, 10, 10, 0.18), rgba(10, 10, 10, 0.62));
   display: grid;
-  gap: 0.72rem;
+  gap: 0.65rem;
   grid-template-rows: auto auto 1fr auto;
 }
 
 .panel.center {
-  transform: translate(-50%, -50%) rotateY(0deg) scale(1.04);
+  transform: translate(-50%, -50%) scale(1);
   opacity: 1;
   z-index: 3;
 }
 
 .panel.left {
-  transform: translate(calc(-50% - 19.8rem), calc(-50% + 1.5rem)) rotateY(28deg) rotateZ(-2deg) scale(0.82);
-  opacity: 0.62;
-  filter: brightness(0.72) blur(0.2px);
+  transform: translate(calc(-50% - 18.5rem), -50%) scale(0.86);
+  opacity: 0.58;
+  filter: saturate(0.86) brightness(0.76);
   z-index: 2;
 }
 
 .panel.right {
-  transform: translate(calc(-50% + 19.8rem), calc(-50% + 1.5rem)) rotateY(-28deg) rotateZ(2deg) scale(0.82);
-  opacity: 0.62;
-  filter: brightness(0.72) blur(0.2px);
+  transform: translate(calc(-50% + 18.5rem), -50%) scale(0.86);
+  opacity: 0.58;
+  filter: saturate(0.86) brightness(0.76);
   z-index: 2;
 }
 
 .panel.hidden {
-  transform: translate(-50%, -50%) scale(0.72);
+  transform: translate(-50%, -50%) scale(0.8);
   opacity: 0;
   pointer-events: none;
   z-index: 1;
 }
 
 .panel h3 {
-  font-size: 1.35rem;
+  font-size: 1.34rem;
   line-height: 1.1;
   color: #fbf8f2;
 }
 
 .panel p {
-  color: rgba(245, 238, 227, 0.72);
+  color: rgba(245, 238, 227, 0.78);
 }
 
 .kicker {
-  font-size: 0.74rem;
-  letter-spacing: 0.18em;
+  font-size: 0.72rem;
+  letter-spacing: 0.17em;
   text-transform: uppercase;
-  color: #c8ab72;
+  color: #d2af72;
   font-weight: 700;
 }
 
 .metric {
   justify-self: start;
-  padding: 0.42rem 0.76rem;
-  border-radius: 0.3rem;
-  background: rgba(186, 152, 89, 0.16);
-  color: #e8cf9f;
-  font-size: 0.82rem;
-  font-weight: 700;
+  padding: 0.4rem 0.72rem;
+  border-radius: 0;
+  background: rgba(186, 152, 89, 0.18);
+  color: #f0d5a2;
+  font-size: 0.8rem;
+  font-weight: 600;
 }
 
 .dots {
-  margin-top: 0.95rem;
+  margin-top: 0.9rem;
   display: flex;
-  gap: 0.5rem;
+  gap: 0.42rem;
   justify-content: center;
   align-items: center;
 }
 
 .dot {
-  width: 0.9rem;
-  height: 0.9rem;
-  border: 1px solid rgba(19, 19, 19, 0.22);
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.35);
+  width: 1.35rem;
+  height: 0.22rem;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(19, 19, 19, 0.2);
   cursor: pointer;
-  transition: all 0.35s ease;
-  display: grid;
-  place-items: center;
+  transition: background-color 0.25s ease, transform 0.25s ease;
   padding: 0;
 }
 
 .dot-core {
-  width: 0.28rem;
-  height: 0.28rem;
-  border-radius: 50%;
-  background: rgba(19, 19, 19, 0.36);
-  transition: all 0.35s ease;
+  display: none;
 }
 
 .dot.active {
-  border-color: rgba(186, 152, 89, 0.62);
-  background: rgba(186, 152, 89, 0.18);
-  box-shadow: 0 0 0 1px rgba(186, 152, 89, 0.22);
-}
-
-.dot.active .dot-core {
-  background: rgba(186, 152, 89, 0.95);
-  transform: scale(1.18);
+  background: rgba(186, 152, 89, 0.9);
+  transform: scaleX(1.08);
 }
 
 @media (max-width: 1024px) and (min-width: 768px) {
-  .stage {
-    margin-top: 1.9rem;
-    padding: 1rem;
-  }
-
-  .stage-head p {
-    margin-left: 0;
-    font-size: 0.76rem;
-    letter-spacing: 0.13em;
-  }
-
-  .carousel-3d {
-    height: 21rem;
+  .carousel {
+    height: 22.5rem;
   }
 
   .panel {
-    width: min(23rem, 68vw);
-    min-height: 16.8rem;
+    width: min(30rem, 72vw);
+    min-height: 19.2rem;
   }
 
   .panel.left {
-    transform: translate(calc(-50% - 11rem), -50%) rotateY(22deg) scale(0.82);
+    transform: translate(calc(-50% - 11.4rem), -50%) scale(0.88);
   }
 
   .panel.right {
-    transform: translate(calc(-50% + 11rem), -50%) rotateY(-22deg) scale(0.82);
-  }
-}
-
-@media (max-width: 900px) {
-  .carousel-3d {
-    height: 20rem;
-  }
-
-  .panel {
-    width: min(22rem, 74vw);
-    min-height: 17.5rem;
-  }
-
-  .panel.left {
-    transform: translate(calc(-50% - 12.2rem), -50%) rotateY(22deg) scale(0.82);
-  }
-
-  .panel.right {
-    transform: translate(calc(-50% + 12.2rem), -50%) rotateY(-22deg) scale(0.82);
+    transform: translate(calc(-50% + 11.4rem), -50%) scale(0.88);
   }
 }
 
 @media (max-width: 700px) {
-  .stage {
-    padding: 1rem;
-  }
-
   .stage-head {
     flex-direction: column;
     align-items: flex-start;
   }
 
-  .controls {
-    display: none;
-  }
-
-  .carousel-3d {
-    height: 18rem;
+  .carousel {
+    height: 19.2rem;
   }
 
   .panel {
-    width: min(18rem, 86vw);
-    min-height: 15rem;
+    width: min(20rem, 90vw);
+    min-height: 16.2rem;
   }
 
-  .panel.left {
-    transform: translate(calc(-50% - 9.5rem), -50%) rotateY(20deg) scale(0.78);
-  }
-
+  .panel.left,
   .panel.right {
-    transform: translate(calc(-50% + 9.5rem), -50%) rotateY(-20deg) scale(0.78);
+    opacity: 0;
+    pointer-events: none;
   }
+}
 
+@media (max-width: 480px) {
   .dots {
     display: none;
   }

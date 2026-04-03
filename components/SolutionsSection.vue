@@ -1,26 +1,26 @@
 <script setup lang="ts">
 const items = [
   {
-    title: "Strategia ceny i wejscia na rynek",
-    text: "Ustalamy strategie ceny dla Twojego mieszkania. Budujemy plan rozmow i margines negocjacyjny, ktory broni Twojego wyniku.",
+    title: "Strategia ceny i wejścia na rynek",
+    text: "Ustalamy strategię ceny dla Twojego mieszkania. Budujemy plan rozmów i margines negocjacyjny, który broni Twojego wyniku.",
     className: "large",
     image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1400&q=80"
   },
   {
     title: "Wizualne przygotowanie mieszkania",
-    text: "Home staging, kadry i narracja, ktora pomaga klientowi szybciej podjac decyzje i skrocic czas sprzedazy.",
+    text: "Home staging, kadry i narracja, która pomaga klientowi szybciej podjąć decyzję i skrócić czas sprzedaży.",
     className: "tall",
     image: "https://images.unsplash.com/photo-1600210492493-0946911123ea?auto=format&fit=crop&w=1400&q=80"
   },
   {
     title: "Leady i prezentacje premium",
-    text: "Kwalifikuje zapytania i prowadze prezentacje tak, aby wzmacniac pozycje wlasciciela, a nie schodzic z ceny.",
+    text: "Kwalifikuję zapytania i prowadzę prezentacje tak, aby wzmacniać pozycję właściciela, a nie schodzić z ceny.",
     className: "wide",
     image: "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1400&q=80"
   },
   {
     title: "Negocjacje + bezpieczny final",
-    text: "Prowadze rozmowy i dokumenty do momentu podpisu. Transparentnie i bez chaosu po stronie wlasciciela.",
+    text: "Prowadzę rozmowy i dokumenty do momentu podpisu. Transparentnie i bez chaosu po stronie właściciela.",
     className: "small",
     image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1400&q=80"
   }
@@ -32,8 +32,8 @@ const items = [
     <div class="container">
       <header class="reveal top">
         <p class="eyebrow">Jak pomagam</p>
-        <h2 class="section-title sweep-reveal">Asymetryczny system dzialan, ktory skraca czas sprzedazy</h2>
-        <a href="#kontakt" class="link-arrow">Umow konsultacje</a>
+        <h2 class="section-title sweep-reveal">Asymetryczny system działań, który skraca czas sprzedaży</h2>
+        <a href="#kontakt" class="link-arrow">Umów konsultację</a>
       </header>
 
       <div class="mosaic">

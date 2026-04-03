@@ -1,20 +1,50 @@
 <script setup lang="ts">
+withDefaults(
+  defineProps<{
+    prefooterKicker?: string;
+    prefooterTitle?: string;
+    prefooterCopy?: string;
+    prefooterTall?: boolean;
+    showHomeLinkInFooter?: boolean;
+    replaceErrorsLinkWithAbout?: boolean;
+    replaceCalculatorLinkWithHome?: boolean;
+    calculatorFooterNavOrder?: boolean;
+    replaceContactLinkWithHome?: boolean;
+    kontaktFooterNavOrder?: boolean;
+    poradnikFooterNavOrder?: boolean;
+  }>(),
+  {
+    prefooterKicker: "Koniec przewijania? Zróbmy pierwszy krok.",
+    prefooterTitle: "Sprzedaj mieszkanie spokojnie i na dobrych warunkach.",
+    prefooterCopy: "",
+    prefooterTall: false,
+    showHomeLinkInFooter: false,
+    replaceErrorsLinkWithAbout: false,
+    replaceCalculatorLinkWithHome: false,
+    calculatorFooterNavOrder: false,
+    replaceContactLinkWithHome: false,
+    kontaktFooterNavOrder: false,
+    poradnikFooterNavOrder: false
+  }
+);
+
 const year = new Date().getFullYear();
 </script>
 
 <template>
   <div class="footer-stack">
-    <section class="prefooter-stage" aria-label="Sekcja koncowa">
-      <div class="prefooter-sticky">
-        <div class="prefooter-shell">
-          <p class="prefooter-kicker">Koniec przewijania? Zrobmy pierwszy krok.</p>
-          <h2>Sprzedaj mieszkanie spokojnie i na dobrych warunkach.</h2>
+    <section class="prefooter-stage" :class="{ 'prefooter-stage--tall': prefooterTall }" aria-label="Sekcja końcowa">
+      <div class="prefooter-sticky" :class="{ 'prefooter-sticky--tall': prefooterTall }">
+        <div class="prefooter-shell" :class="{ 'prefooter-shell--tall': prefooterTall }">
+          <p class="prefooter-kicker">{{ prefooterKicker }}</p>
+          <h2>{{ prefooterTitle }}</h2>
+          <p v-if="prefooterCopy" class="prefooter-copy">{{ prefooterCopy }}</p>
           <a href="#kontakt" class="prefooter-btn">
             <span class="prefooter-btn-text-wrap" aria-hidden="true">
-              <span class="prefooter-btn-text prefooter-btn-text-top">Umow konsultacje</span>
-              <span class="prefooter-btn-text prefooter-btn-text-bottom">Umow konsultacje</span>
+              <span class="prefooter-btn-text prefooter-btn-text-top">Umów konsultację</span>
+              <span class="prefooter-btn-text prefooter-btn-text-bottom">Umów konsultację</span>
             </span>
-            <span class="sr-only">Umow konsultacje</span>
+            <span class="sr-only">Umów konsultację</span>
             <span class="prefooter-btn-arrow" aria-hidden="true">→</span>
           </a>
         </div>
@@ -24,30 +54,86 @@ const year = new Date().getFullYear();
     <footer class="site-footer">
       <div class="container footer-shell">
         <div class="footer-brand">
-          <p class="footer-logo">FIND Ekspert Sprzedazy</p>
+          <a href="/" class="footer-logo" aria-label="FIND home">
+            <img src="/LOGO.png" alt="FIND" />
+          </a>
           <p class="footer-copy">
-            Eksperckie wsparcie wlasciciela mieszkania: od strategii ceny po bezpieczny podpis.
+            Eksperckie wsparcie właściciela mieszkania: od strategii ceny po bezpieczny podpis.
           </p>
         </div>
 
         <div class="footer-links">
-          <a href="#bledy">Bledy</a>
-          <a href="#jak-pomagam">Jak pomagam</a>
-          <a href="#blog">Artykuly</a>
-          <a href="#kontakt">Kontakt</a>
+          <template v-if="poradnikFooterNavOrder">
+            <a href="/">Główna</a>
+            <a href="/o-mnie">O mnie</a>
+            <a href="/bledy">Błędy</a>
+            <a href="/kalkulator">Kalkulator</a>
+            <a href="/kontakt">Kontakt</a>
+          </template>
+          <template v-else-if="kontaktFooterNavOrder">
+            <a href="/">Główna</a>
+            <a href="/o-mnie">O mnie</a>
+            <a href="/bledy">Błędy</a>
+            <a href="/poradnik">Poradnik</a>
+            <a href="/kalkulator">Kalkulator</a>
+          </template>
+          <template v-else-if="calculatorFooterNavOrder">
+            <a href="/">Główna</a>
+            <a href="/o-mnie">O mnie</a>
+            <a href="/bledy">Błędy</a>
+            <a href="/poradnik">Poradnik</a>
+            <a href="/kontakt">Kontakt</a>
+          </template>
+          <template v-else>
+            <a href="/">Główna</a>
+            <a v-if="!replaceErrorsLinkWithAbout" href="/o-mnie">O mnie</a>
+            <a v-if="replaceErrorsLinkWithAbout" href="/o-mnie">O mnie</a>
+            <a v-else href="/bledy">Błędy</a>
+            <a href="/poradnik">Poradnik</a>
+            <a v-if="replaceCalculatorLinkWithHome" href="/">Kalkulator</a>
+            <a v-else href="/kalkulator">Kalkulator</a>
+            <a v-if="replaceContactLinkWithHome" href="/">Kontakt</a>
+            <a v-else href="/kontakt">Kontakt</a>
+          </template>
         </div>
 
         <div class="footer-social">
-          <a href="#" aria-label="Instagram">Instagram</a>
-          <a href="#" aria-label="Facebook">Facebook</a>
-          <a href="#" aria-label="LinkedIn">LinkedIn</a>
+          <a href="#" aria-label="Instagram">
+            <span class="social-ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <rect x="3.5" y="3.5" width="17" height="17" rx="5"></rect>
+                <circle cx="12" cy="12" r="4.1"></circle>
+                <circle cx="17.35" cy="6.65" r="1"></circle>
+              </svg>
+            </span>
+            Instagram
+          </a>
+          <a href="#" aria-label="Facebook">
+            <span class="social-ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M14.2 8.1h2.2V4.5h-2.6c-3 0-4.6 1.8-4.6 4.9v2H6.8v3.7h2.4V20h3.8v-4.9h2.9l.5-3.7h-3.4V9.8c0-1 .4-1.7 1.6-1.7Z"></path>
+              </svg>
+            </span>
+            Facebook
+          </a>
+          <a href="#" aria-label="LinkedIn">
+            <span class="social-ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <rect x="4" y="9.2" width="3.4" height="10.8"></rect>
+                <circle cx="5.7" cy="5.8" r="1.6"></circle>
+                <path d="M10 9.2h3.3v1.5c.6-1 1.8-1.8 3.6-1.8 3 0 4.1 2 4.1 5.1V20h-3.5v-5.3c0-1.7-.6-2.6-1.9-2.6-1.5 0-2.2 1.1-2.2 2.6V20H10V9.2Z"></path>
+              </svg>
+            </span>
+            LinkedIn
+          </a>
         </div>
       </div>
 
       <div class="container footer-bottom">
-        <p>© {{ year }} FIND Ekspert Sprzedazy. Wszelkie prawa zastrzezone.</p>
+        <p>© {{ year }} FIND. Wszelkie prawa zastrzeżone.</p>
       </div>
     </footer>
+
   </div>
 </template>
 
@@ -86,6 +172,15 @@ const year = new Date().getFullYear();
       center / cover no-repeat;
 }
 
+.prefooter-stage--tall {
+  min-height: 68vh;
+}
+
+.prefooter-sticky--tall,
+.prefooter-shell--tall {
+  height: 60vh;
+}
+
 .prefooter-kicker {
   font-size: 0.74rem;
   letter-spacing: 0.16em;
@@ -101,6 +196,11 @@ const year = new Date().getFullYear();
   max-width: 16ch;
 }
 
+.prefooter-copy {
+  max-width: 60ch;
+  color: rgba(243, 236, 222, 0.92);
+}
+
 .prefooter-btn {
   margin-top: 0.92rem;
   display: inline-flex;
@@ -108,15 +208,16 @@ const year = new Date().getFullYear();
   justify-content: center;
   gap: 0.42rem;
   padding: 0.86rem 1.45rem;
-  border-radius: 999px;
-  color: var(--paper);
-  background: linear-gradient(180deg, #2a2620, #191715);
-  border: 1px solid rgba(255, 255, 255, 0.26);
-  font-weight: 700;
+  border-radius: 0;
+  color: #f4eee2;
+  background: rgba(16, 14, 12, 0.12);
+  border: 2px solid rgba(244, 238, 226, 0.9);
+  font-weight: 500;
   font-size: 0.94rem;
   line-height: 1.1;
-  box-shadow: 0 12px 28px rgba(19, 19, 19, 0.3);
-  transition: transform 0.25s ease, border-color 0.25s ease, background-color 0.25s ease, box-shadow 0.18s ease, filter 0.18s ease;
+  box-shadow: none;
+  text-decoration: none;
+  transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease;
 }
 
 .prefooter-btn-text-wrap {
@@ -144,11 +245,11 @@ const year = new Date().getFullYear();
 
 .prefooter-btn:hover,
 .prefooter-btn:focus-visible {
-  transform: translateY(-2px);
-  border-color: rgba(186, 152, 89, 0.8);
-  background: linear-gradient(180deg, #2a2620, #191715);
-  filter: brightness(1.03);
-  box-shadow: 0 13px 29px rgba(19, 19, 19, 0.34);
+  transform: none;
+  border-color: rgba(244, 238, 226, 1);
+  background: rgba(16, 14, 12, 0.26);
+  filter: none;
+  box-shadow: none;
   outline: none;
 }
 
@@ -164,15 +265,17 @@ const year = new Date().getFullYear();
 
 .prefooter-btn-arrow {
   display: inline-block;
-  font-size: 1rem;
+  font-size: 1.15rem;
   line-height: 1;
   transform: translateX(0);
-  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+  opacity: 0.9;
+  transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.32s ease;
 }
 
 .prefooter-btn:hover .prefooter-btn-arrow,
 .prefooter-btn:focus-visible .prefooter-btn-arrow {
-  transform: translateX(2px);
+  transform: translateX(6px);
+  opacity: 1;
 }
 
 .sr-only {
@@ -209,10 +312,15 @@ const year = new Date().getFullYear();
 }
 
 .footer-logo {
-  font-size: clamp(1rem, 1.4vw, 1.3rem);
-  letter-spacing: -0.02em;
-  font-weight: 700;
-  color: var(--ink);
+  display: inline-flex;
+  align-items: center;
+  width: clamp(90px, 9vw, 130px);
+}
+
+.footer-logo img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .footer-copy {
@@ -230,11 +338,31 @@ const year = new Date().getFullYear();
 
 .footer-links a,
 .footer-social a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   width: fit-content;
   position: relative;
   padding-bottom: 0.08rem;
   color: rgba(19, 19, 19, 0.9);
   font-size: 0.92rem;
+}
+
+.social-ico {
+  display: inline-flex;
+  width: 1.12rem;
+  height: 1.12rem;
+  color: var(--gold);
+  transform: translateY(-0.01em);
+}
+
+.social-ico svg {
+  width: 100%;
+  height: 100%;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .footer-links a::after,
@@ -245,7 +373,7 @@ const year = new Date().getFullYear();
   right: 0;
   bottom: 0;
   height: 1px;
-  background: rgba(19, 19, 19, 0.75);
+  background: var(--gold);
   transform: scaleX(0);
   transform-origin: left center;
   transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
@@ -256,6 +384,13 @@ const year = new Date().getFullYear();
 .footer-social a:hover::after,
 .footer-social a:focus-visible::after {
   transform: scaleX(1);
+}
+
+.footer-links a:hover,
+.footer-links a:focus-visible,
+.footer-social a:hover,
+.footer-social a:focus-visible {
+  color: var(--gold);
 }
 
 .footer-bottom {

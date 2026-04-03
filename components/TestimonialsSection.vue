@@ -2,18 +2,18 @@
 const reviews = [
   {
     quote:
-      "Mieszkanie sprzedane w 19 dni, a caly proces byl poukladany i przewidywalny od pierwszego spotkania.",
-    author: "Alicja i Piotr, Gdansk"
+      "Mieszkanie sprzedane w 19 dni, a cały proces był poukładany i przewidywalny od pierwszego spotkania.",
+    author: "Alicja i Piotr, Gdańsk"
   },
   {
     quote:
-      "Najwieksza roznica? Profesjonalne negocjacje. Finalna cena byla wyzsza niz zakladalam na starcie.",
+      "Największa różnica? Profesjonalne negocjacje. Finalna cena była wyższa niż zakładałam na starcie.",
     author: "Monika, Warszawa"
   },
   {
     quote:
-      "Bez chaosu i bez nerwow. Otrzymalismy konkretny plan i wsparcie az do podpisania aktu.",
-    author: "Tomasz, Krakow"
+      "Bez chaosu i bez nerwów. Otrzymaliśmy konkretny plan i wsparcie aż do podpisania aktu.",
+    author: "Tomasz, Kraków"
   }
 ];
 </script>
@@ -22,9 +22,9 @@ const reviews = [
   <section class="section">
     <div class="container">
       <div class="section-head reveal">
-        <p class="eyebrow">Zaufanie klientow</p>
-        <h2>Skutecznosc widoczna w liczbach i decyzjach klientow</h2>
-        <p>Prawdziwe historie sprzedazy, w ktorych liczyla sie cena, czas i spokoj calego procesu.</p>
+        <p class="eyebrow">Zaufanie klientów</p>
+        <h2>Skuteczność widoczna w liczbach i decyzjach klientów</h2>
+        <p>Prawdziwe historie sprzedaży, w których liczyła się cena, czas i spokój całego procesu.</p>
       </div>
       <div class="review-grid">
         <article v-for="(item, idx) in reviews" :key="item.author" class="review-card reveal" :style="{ '--d': `${idx * 90}ms` }">

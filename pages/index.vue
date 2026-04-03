@@ -2,11 +2,10 @@
   <div>
     <main>
       <HeroSection />
-      <ProblemsSection />
-      <SolutionsSection />
-      <ScrollStorySection />
+      <HomeValueSection />
       <ProcessSection />
-      <BlogSection />
+      <ResultsSection />
+      <TrustSection />
       <CtaSection />
     </main>
     <FooterSection />

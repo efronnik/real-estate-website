@@ -78,7 +78,7 @@ const arrows = [
     <div class="container">
       <p class="story-title">
         To nie jest tylko
-        <span :style="{ opacity: titleAccentOpacity }">o sprzedazy mieszkania.</span>
+        <span :style="{ opacity: titleAccentOpacity }">o sprzedaży mieszkania.</span>
       </p>
 
       <div class="arrow-row">

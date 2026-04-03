@@ -1,9 +1,17 @@
 <script setup lang="ts">
-const steps = [
+type ProcessStep = {
+  label: string;
+  title: string;
+  text: string;
+  hero: string;
+  image: string;
+};
+
+const defaultSteps: ProcessStep[] = [
   {
     label: "01",
     title: "Diagnoza i pozycjonowanie",
-    text: "Szybka diagnoza sytuacji mieszkania i rynku. Ustalamy plan, ktory daje realna przewage wlascicielowi.",
+    text: "Szybka diagnoza sytuacji mieszkania i rynku. Ustalamy plan, który daje realną przewagę właścicielowi.",
     hero: "Diagnoza",
     image:
       "https://images.unsplash.com/photo-1460317442991-0ec209397118?auto=format&fit=crop&w=1600&q=80"
@@ -11,7 +19,7 @@ const steps = [
   {
     label: "02",
     title: "Przygotowanie i publikacja",
-    text: "Materialy premium i narracja, ktora pokazuje wartosc mieszkania oraz prowadzi klienta do decyzji.",
+    text: "Materiały premium i narracja, która pokazuje wartość mieszkania oraz prowadzi klienta do decyzji.",
     hero: "Ekspozycja",
     image:
       "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80"
@@ -19,7 +27,7 @@ const steps = [
   {
     label: "03",
     title: "Pokazy i negocjacje",
-    text: "Prowadze rozmowy i zarzadzam dynamika tak, aby bronic ceny i domykac transakcje.",
+    text: "Prowadzę rozmowy i zarządzam dynamiką tak, aby bronić ceny i domykać transakcje.",
     hero: "Negocjacje",
     image:
       "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1600&q=80"
@@ -27,31 +35,44 @@ const steps = [
   {
     label: "04",
     title: "Final i przekazanie",
-    text: "Domykamy formalnosci, terminy i podpis. Bez chaosu i bez ryzyka utraty kontroli.",
+    text: "Domykamy formalności, terminy i podpis. Bez chaosu i bez ryzyka utraty kontroli.",
     hero: "Finalizacja",
     image:
       "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1600&q=80"
   }
 ];
+
+const props = withDefaults(
+  defineProps<{
+    eyebrow?: string;
+    title?: string;
+    steps?: ProcessStep[];
+  }>(),
+  {
+    eyebrow: "Proces pracy",
+    title: "Jak prowadzimy sprzedaż od strategii do podpisu"
+  }
+);
+const resolvedSteps = computed(() => (props.steps?.length ? props.steps : defaultSteps));
 </script>
 
 <template>
   <section class="section process">
     <div class="container">
       <header class="process-head reveal">
-        <p class="eyebrow">Proces pracy</p>
-        <h2 class="section-title">Jak prowadzimy sprzedaz od strategii do podpisu</h2>
+        <p class="eyebrow">{{ props.eyebrow }}</p>
+        <h2 class="section-title">{{ props.title }}</h2>
       </header>
 
       <div class="service-board reveal delay-1">
         <article
-          v-for="step in steps"
+          v-for="step in resolvedSteps"
           :key="step.title"
           class="service-row"
           :style="{ '--bg': `url(${step.image})` }"
         >
           <div class="service-info">
-            <p class="idx">{{ step.label }}</p>
+            <p class="idx"><span class="idx-text">{{ step.label }}</span></p>
             <h3>{{ step.title }}</h3>
             <p>{{ step.text }}</p>
           </div>
@@ -77,12 +98,18 @@ const steps = [
 }
 
 .process-head :deep(.section-title),
-.process-head :deep(.section-copy),
-.process-head :deep(.eyebrow) {
+.process-head :deep(.section-copy) {
   color: #f7f2e8;
 }
 
+.process-head :deep(.eyebrow) {
+  color: var(--gold);
+}
+
 .service-board {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
   border-top: 1px solid rgba(255, 255, 255, 0.12);
   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 }
@@ -112,12 +139,15 @@ const steps = [
   background-position: center;
   opacity: 1;
   transform: translateY(100%);
-  transition: transform 0.72s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 1.08s cubic-bezier(0.22, 1, 0.36, 1);
   z-index: 0;
 }
 
 .service-info {
-  padding: 1.2rem 1rem;
+  padding-top: 1.2rem;
+  padding-right: 1rem;
+  padding-bottom: 1.2rem;
+  padding-left: max(1.2rem, calc(50vw - 690px));
   background: transparent;
   position: relative;
   z-index: 2;
@@ -129,12 +159,19 @@ const steps = [
   text-transform: uppercase;
   color: #f1f1f1;
   font-weight: 700;
-  display: inline-grid;
-  place-items: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
   width: 1.35rem;
   height: 1.35rem;
   border: 1px solid rgba(255, 255, 255, 0.45);
   border-radius: 999px;
+}
+
+.idx-text {
+  display: block;
+  transform: translateY(-0.11em);
 }
 
 .service-info h3 {
@@ -171,7 +208,7 @@ const steps = [
   inset: 0;
   background: #0d0f11;
   transform: translateY(0);
-  transition: transform 0.72s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 1.08s cubic-bezier(0.22, 1, 0.36, 1);
   z-index: 0;
 }
 
@@ -195,7 +232,7 @@ const steps = [
   background: rgba(255, 255, 255, 0.95);
   transform: scaleX(0);
   transform-origin: left center;
-  transition: transform 0.54s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
+  transition: transform 0.78s cubic-bezier(0.22, 1, 0.36, 1) 0.22s;
 }
 
 .service-row:hover .service-word::after {
@@ -213,6 +250,10 @@ const steps = [
 @media (max-width: 1000px) {
   .service-row {
     grid-template-columns: 1fr;
+  }
+
+  .service-info {
+    padding-left: 1.2rem;
   }
 
   .service-word {

@@ -22,7 +22,7 @@ const submitForm = () => {
           <div class="map-overlay"></div>
           <p class="vertical-label">Kontakt</p>
           <div class="copy-inner">
-            <p class="eyebrow">Konsultacja / Wspolpraca</p>
+            <p class="eyebrow">Konsultacja / Współpraca</p>
             <h2>Warszawa, Polska</h2>
             <p>
               Pracujemy lokalnie, ale prowadzimy proces end-to-end. Dostajesz strategię, egzekucję
@@ -33,7 +33,7 @@ const submitForm = () => {
 
         <form class="form reveal delay-1" @submit.prevent="submitForm">
           <label>
-            Imie i nazwisko
+            Imię i nazwisko
             <input v-model="form.name" type="text" placeholder="Jan Kowalski" required />
           </label>
 
@@ -49,27 +49,27 @@ const submitForm = () => {
 
           <label>
             Miasto / dzielnica
-            <input v-model="form.city" type="text" placeholder="Warszawa, Mokotow" required />
+            <input v-model="form.city" type="text" placeholder="Warszawa, Mokotów" required />
           </label>
 
           <label>
-            Krotki opis mieszkania i sytuacji
+            Krótki opis mieszkania i sytuacji
             <textarea
               v-model="form.message"
               rows="4"
-              placeholder="Metraz, liczba pokoi, standard, planowany termin sprzedazy..."
+              placeholder="Metraż, liczba pokoi, standard, planowany termin sprzedaży..."
             />
           </label>
 
-          <button type="submit">
+          <button type="submit" class="form-cta">
             <span class="form-btn-text-wrap" aria-hidden="true">
-              <span class="form-btn-text form-btn-text-top">Wyslij zapytanie</span>
-              <span class="form-btn-text form-btn-text-bottom">Wyslij zapytanie</span>
+              <span class="form-btn-text form-btn-text-top">Wyślij zapytanie</span>
+              <span class="form-btn-text form-btn-text-bottom">Wyślij zapytanie</span>
             </span>
-            <span class="sr-only">Wyslij zapytanie</span>
+            <span class="sr-only">Wyślij zapytanie</span>
           </button>
           <p v-if="submitted" class="form-success">
-            Dziekuje. Formularz jest gotowy do podlaczenia pod CRM lub automatyzacje e-mail.
+            Dziękuję. Formularz jest gotowy do podłączenia pod CRM lub automatyzację e-mail.
           </p>
         </form>
       </div>
@@ -194,23 +194,24 @@ const submitForm = () => {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 0.42rem;
+  width: 100%;
   margin-top: 0.8rem;
-  border: 0;
+  border: 2px solid rgba(244, 238, 226, 0.9);
   border-radius: 0;
-  background: transparent;
-  color: var(--gold);
-  font-weight: 700;
-  padding: 0.9rem 0;
-  border-bottom: 1px solid rgba(186, 152, 89, 0.82);
+  background: rgba(16, 14, 12, 0.12);
+  color: #f4eee2;
+  font-weight: 500;
+  font-size: 1.2rem;
+  line-height: 1;
+  padding: 1rem 1.4rem;
   cursor: pointer;
-  transition: letter-spacing 0.25s ease, border-color 0.25s ease;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
+  transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease;
 }
 
 .form button:hover {
-  letter-spacing: 0.16em;
-  border-bottom-color: rgba(186, 152, 89, 1);
+  background: rgba(16, 14, 12, 0.26);
+  border-color: rgba(244, 238, 226, 1);
 }
 
 .form-btn-text-wrap {
@@ -247,7 +248,8 @@ const submitForm = () => {
 
 .form button:focus-visible {
   outline: none;
-  border-bottom-color: rgba(186, 152, 89, 1);
+  background: rgba(16, 14, 12, 0.26);
+  border-color: rgba(244, 238, 226, 1);
 }
 
 .sr-only {

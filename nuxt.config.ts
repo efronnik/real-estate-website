@@ -7,12 +7,15 @@ export default defineNuxtConfig({
   vite: {
     server: {
       watch: {
+        usePolling: true,
+        interval: 800,
         ignored: [
           "**/.git/**",
           "**/.output/**",
           "**/.nuxt/**",
           "**/.tmp/**",
-          "**/node_modules/**"
+          "**/node_modules/**",
+          "**/.cursor/**"
         ]
       }
     }
@@ -33,7 +36,7 @@ export default defineNuxtConfig({
         {
           rel: "stylesheet",
           href:
-            "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+            "https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
         }
       ]
     }
